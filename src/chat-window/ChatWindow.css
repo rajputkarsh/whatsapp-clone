@@ -38,3 +38,60 @@
     padding: 30px;
     overflow-y: scroll;
 }
+
+.chat-message{
+    position: relative;
+    font-size: 16px;
+    padding:10px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 25px;
+}
+
+.chat-name{
+    position: absolute;
+    font-size: xx-small;
+    font-weight: 800;
+    top: -15px;
+}
+
+.chat-timestamp{
+    margin-left: 10px;
+    font-size: xx-small;
+}
+
+.message-sender{
+    margin-left: auto;
+    background-color: #dcf8c6;
+}
+
+
+.chat-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    border-top: 1px solid lightgray;
+}
+
+.chat-footer > form{
+    flex:1;
+    display: flex;
+}
+
+.chat-footer > form > input{
+    flex: 1;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+}
+
+.chat-footer > form > button{
+    display:none;
+}
+
+.chat-footer > .MuiSvgIcon-root{
+    padding: 10px;
+    color: gray;
+}
