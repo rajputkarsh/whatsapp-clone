@@ -7,11 +7,20 @@ import React, { useState } from 'react';
 import './App.css';
 import Login from './login/Login';
 import { useStateValue } from './data-layer/StateProvider';
+import { actionTypes } from './data-layer/reducer'
 
 
 function App() {
 
   const [{ user }, dispatch] = useStateValue();
+  const localUserData = JSON.parse(localStorage.getItem("user"));
+  
+  if (!user && localUserData) {
+    dispatch({
+      type: actionTypes.SET_USER,
+      user: localUserData
+    });
+  }
 
   return (
     

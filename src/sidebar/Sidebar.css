@@ -4,9 +4,14 @@
 
 .sidebar-header{
     display: flex;
-    justify-content: space-between;
     padding: 20px;
     border-right: 1px solid lightgray;
+}
+
+.sidebar-header > h3{
+    align-items: center;
+    padding-left: 20px;
+    display: flex;
 }
 
 .sidebar-header-right{
@@ -41,6 +46,7 @@
 .sidebar-search-container > input {
     border: none;
     margin-left: 10px;
+    outline: none;
 }
 
 .sidebar-search-container > .MuiSvgIcon-root{

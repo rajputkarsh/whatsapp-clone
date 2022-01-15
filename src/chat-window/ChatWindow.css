@@ -27,7 +27,7 @@
 .chat-header-rightside{
     display: flex;
     justify-content: space-between;
-    min-width: 100px;
+    min-width: 40px;
 }
 
 .chat-body{
@@ -85,6 +85,7 @@
     border-radius: 10px;
     padding: 10px;
     border: none;
+    outline: none;
 }
 
 .chat-footer > form > button{
@@ -94,4 +95,10 @@
 .chat-footer > .MuiSvgIcon-root{
     padding: 10px;
     color: gray;
+}
+
+.select-chat-warning{
+    display:flex;
+    justify-content: center;
+    margin-top: 35vh;
 }

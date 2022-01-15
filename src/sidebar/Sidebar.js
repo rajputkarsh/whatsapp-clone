@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar, IconButton } from '@mui/material'
-import DonutLargeIcon from '@mui/icons-material/DonutLarge';
-import ChatIcon from '@mui/icons-material/Chat';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Avatar } from '@mui/material'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SidebarChat from './SidebarChat';
 import database from '../db/backend';
@@ -13,10 +10,12 @@ import { useStateValue } from '../data-layer/StateProvider';
 function Sidebar() {
 
     const [chatRooms, setChatRooms] = useState([]);
+    const [userSearch, setUserSearch] = useState("");
     const [{ user }, dispatch] = useStateValue();
 
+
     useEffect(()=>{
-        const unsubscribe = database.collection('rooms').onSnapshot((snapshot) => {
+        const unsubscribe = database.collection('rooms').orderBy("createdOn", "desc").onSnapshot((snapshot) => {
             setChatRooms(snapshot.docs.map( doc => (
                 {
                     id: doc.id,
@@ -30,27 +29,28 @@ function Sidebar() {
         }
     }, []);
 
+    const handleUserSearch = (value) => {
+        setUserSearch(value);
+    }
+
+    const isKeywordInName = (keyword, name) => {
+        if(keyword.length > 0){
+            return name.toLowerCase().includes(keyword.toLowerCase());
+        }
+        return true;
+    }
+
     return (
         <div className='sidebar'>
             <div className="sidebar-header">
                 <Avatar src={user?.photoURL} />
-                <div className="sidebar-header-right">
-                    <IconButton>
-                        <DonutLargeIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ChatIcon />
-                    </IconButton>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
-                </div>
+                <h3>Welcome, {user?.displayName}</h3>
             </div>
 
             <div className="sidebar-search">
                 <div className="sidebar-search-container">
                     <SearchOutlinedIcon />
-                    <input type="text" placeholder="Search or start a new chat" />
+                    <input type="text" value={userSearch} onChange={e => {handleUserSearch(e.target.value)}} placeholder="Search or start a new chat" />
                 </div>
                 
             </div>
@@ -60,7 +60,7 @@ function Sidebar() {
                 
                 {
                     chatRooms.map(room => (
-                        <SidebarChat key={room.id} id={room.id} name={room.data.name}/>
+                        isKeywordInName(userSearch, room.data.name) ? <SidebarChat key={room.id} id={room.id} name={room.data.name} /> : ""
                     ))
                 }
 

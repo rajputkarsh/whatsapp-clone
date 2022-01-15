@@ -3,6 +3,7 @@ import React from 'react'
 import { actionTypes } from '../data-layer/reducer'
 import { useStateValue } from '../data-layer/StateProvider'
 import { authentifier, provider } from '../db/backend'
+import { GoogleAuthProvider } from "firebase/auth";
 
 import './Login.css'
 
@@ -12,6 +13,15 @@ function Login() {
 
     const signIn = () => {
         authentifier.signInWithPopup(provider).then(result => {
+            
+            localStorage.setItem("user-token", JSON.stringify(
+                result.credential
+            ));
+
+            localStorage.setItem("user", JSON.stringify(
+                result.user
+            ));
+
             dispatch({
                 type: actionTypes.SET_USER,
                 user: result.user
@@ -19,6 +29,7 @@ function Login() {
         })
         .catch(err => {
             console.log(err);
+            alert("Error occured while signing in");
         });
     }
 
@@ -29,7 +40,7 @@ function Login() {
                 <div className="login-text">
                     <h1>Login to Whatsapp</h1>
                 </div>
-                <Button type="submit" onClick={signIn} >Sign In with Google</Button>
+                <Button type="submit" className="login-button" onClick={signIn} >Sign In with Google</Button>
             </div>
         </div>
     )
