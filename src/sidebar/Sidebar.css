@@ -1,5 +1,6 @@
 .sidebar{
-    flex: 0.30;
+    flex: 0.30;    
+    overflow-y: overlay;
 }
 
 .sidebar-header{
