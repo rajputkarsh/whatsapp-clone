@@ -1,12 +1,12 @@
-#Whatsapp Clone
+# Whatsapp Clone
 
-##The Project is made in React JS using `create-react-app`
+## The Project is made in React JS using `create-react-app`
 
-###Demo Link `https://whatsapp-clone-22f3d.web.app/`
+### Demo Link `https://whatsapp-clone-22f3d.web.app/`
 
-###Copy and Resuse
+### Copy and Resuse
 Feel free to copy the code, download or modify it.
 
-###Backend
+### Backend
 The backend is deployed using firebase. 
 `/db/backend` contains a dummy firebase configuration. Change it accordingly
